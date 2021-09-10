@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Aluno</title>
+    <script src="assets/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-links">
+            Cadastro de Alunos
+        </nav>
+    </header>
+    <div class="container">
+        <input type="text" placeholder="Nome" id="nome">
+        <input type="text" placeholder="Endereço" id="endereco">
+        <input type="text" placeholder="Telefone" id="telefone">
+        <input type="text" placeholder="Faculdade" id="faculdade">
+        <input type="text" placeholder="Turno" id="turno">
+        
+        <input type="button" onclick="CriarUsuario()" id="btnCriar" value="Criar">
+        <input type="button" id="btnEditar" onclick="EditarUsuario()"value="Editar">
+
+    </div>
+    <div>
+        <table class="list" id="tabelaUsuarios">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Faculdade</th>
+                    <th>Turno</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    
+</body>
+
+</html>
