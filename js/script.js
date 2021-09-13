@@ -1,73 +1,79 @@
-class Aluno {
-    constructor() {
-        this.id = 1;
-        this.arrayAlunos = [];
-    }
+var selectedRow = null
 
-    salvar() {
-        let aluno = this.lerDados();
-        if (this.validaCampos(aluno)) {
-            alert('salvar')
-        }
-        console.log(aluno);
-    }
-    lerDados() {
-        let aluno = {};
-        
-        aluno.id = this.id;
-        aluno.nomeAluno = document.getElementById('aluno').value;
-        aluno.faculdade = document.getElementById('faculdade').value;
-
-        return aluno;
-    }
-    listaTabela(){
-        let tbody = document.getElementById('tbody');
-        tbody.innerText ='';
-        for(let i=0; i < this.arrayAlunos.length; i++){
-            let tr = tbody.insertRow();
-
-            let td_id = tr.insertCell();
-            let td_aluno = tr.insertCell();
-            let td_faculdade = tr.insertCell();
-            let td_acoes = tr.insertCell();
-
-            td_id.innerText = this.arrayAlunos[i].id;
-            td_aluno.innerText = this.arrayAlunos[i].nomeAluno;
-            td_faculdade.innerText = this.arrayAlunos[i].faculdade;
-
-            td_id.classList.add('center');
-
-            let imgEdit = document.createElement('img');
-            imgEdit.src = 'assets/editing.png';
-
-            let imgDelete = document.createElement('img');
-            imgDelete.src = 'assets/detele.png';
-
-            td_acoes.appendChild(imgEdit);
-            td_acoes.appendChild(imgDelete);
-
-        }
-    }
-    adicionar(aluno){
-        this.arrayAlunos.push(aluno);
-        this.id++;
-    }
-    validaCampos() {
-        let msg = '';
-        if (aluno.nomeAluno == '') {
-            msg += '- Informe o nome do Aluno \n';
-        }
-        if (aluno.faculdade == '') {
-            msg += '- Informe a Faculdade do Aluno \n';
-        }
-        if (msg != '') {
-            alert(msg);
-            return false;
-        }
-        return true;
-    }
-    cancelar() {
-        alert('Operação Cancelada!')
+function onFormSubmit() {
+    if (validate()) {
+        var formData = readFormData();
+        if (selectedRow == null)
+            insertNewRecord(formData);
+        else
+            updateRecord(formData);
+        resetForm();
     }
 }
-var aluno = new Aluno();
+
+function readFormData() {
+    var formData = {};
+    formData["nomeCompleto"] = document.getElementById("nomeCompleto").value;
+    formData["faculdade"] = document.getElementById("faculdade").value;
+    formData["telefone"] = document.getElementById("telefone").value;
+    formData["mensalidade"] = document.getElementById("mensalidade").value;
+    return formData;
+}
+
+function insertNewRecord(data) {
+    var table = document.getElementById("bazarList").getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.length);
+    cell1 = newRow.insertCell(0);
+    cell1.innerHTML = data.nomeCompleto;
+    cell2 = newRow.insertCell(1);
+    cell2.innerHTML = data.faculdade;
+    cell3 = newRow.insertCell(2);
+    cell3.innerHTML = data.telefone;
+    cell4 = newRow.insertCell(3);
+    cell4.innerHTML = data.mensalidade;
+    cell4 = newRow.insertCell(4);
+    cell4.innerHTML = `<a onClick="onEdit(this)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                       <a onClick="onDelete(this)"><i class="fa fa-remove" style="margin-left:5px;color:red"></i></a>`;
+}
+
+function resetForm() {
+    document.getElementById("nomeCompleto").value = "";
+    document.getElementById("faculdade").value = "";
+    document.getElementById("telefone").value = "";
+    document.getElementById("mensalidade").value = "";
+    selectedRow = null;
+}
+
+function onEdit(td) {
+    selectedRow = td.parentElement.parentElement;
+    document.getElementById("nomeCompleto").value = selectedRow.cells[0].innerHTML;
+    document.getElementById("faculdade").value = selectedRow.cells[1].innerHTML;
+    document.getElementById("telefone").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("mensalidade").value = selectedRow.cells[3].innerHTML;
+}
+function updateRecord(formData) {
+    selectedRow.cells[0].innerHTML = formData.nomeCompleto;
+    selectedRow.cells[1].innerHTML = formData.faculdade;
+    selectedRow.cells[2].innerHTML = formData.telefone;
+    selectedRow.cells[3].innerHTML = formData.mensalidade;
+}
+
+function onDelete(td) {
+    if (confirm('Are you sure to delete this record ?')) {
+        row = td.parentElement.parentElement;
+        document.getElementById("bazarList").deleteRow(row.rowIndex);
+        resetForm();
+    }
+}
+function validate() {
+    isValid = true;
+    if (document.getElementById("nomeCompleto").value == "") {
+        isValid = false;
+        document.getElementById("validacaoNomeCompleto").classList.remove("hide");
+    } else {
+        isValid = true;
+        if (!document.getElementById("validacaoNomeCompleto").classList.contains("hide"))
+            document.getElementById("validacaoNomeCompleto").classList.add("hide");
+    }
+    return isValid;
+}

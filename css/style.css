@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: blueviolet;
+    background-color: #024059;
     padding: 10px;
     color: #fff;
     text-align: center;
@@ -33,19 +33,26 @@ input {
     border-radius:  3px;
     outline: 0;
 }
+.submit {
+    background-color: green;
+}
+.submit:hover {
+    background-color: rgb(31, 168, 54);
+}
+.reset {
+    background-color: red;
+}
+.reset:hover {
+    background-color: rgb(209, 49, 49);
+}
 button {
     border: 0px;
     padding: 10px;
     outline: 0;
-    background-color: blueviolet;
     color: #fff;
     border-radius: 3px;
     font-weight: bold;
     transition: all ease 0.3s;
-}
-
-button:hover {
-    background-color: rgb(102, 31, 168);
 }
 .content {
     margin-top: 15px;

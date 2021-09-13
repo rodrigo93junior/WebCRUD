@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <script src="./js/script.js"></script>
     <title>CRUD</title>
 </head>
@@ -22,41 +24,52 @@
             <h2>Alunos</h2>
             <span>Listar Alunos.</span>
         </div>
-        <div class="card">
-            <div class="lineInput">
-                <label>Aluno</label>
-                <input type="text" id="aluno" placeholder="Nome completo">
+        <div class="container">
+            <div class="card card-body card-form ">
+                <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off">
+                    <div class="lineInput">
+                        <label>Nome Completo*</label><label class="validation-error hide"
+                            id="validacaoNomeCompleto"></label>
+                        <input class="form-control" type="text" name="nomeCompleto" id="nomeCompleto"
+                            placeholder="Nome Completo" required>
+                    </div>
+                    <div class="lineInput">
+                        <label>Nome da Faculdade</label>
+                        <input class="form-control" type="text" name="faculdade" id="faculdade"
+                            placeholder="Nome da Faculdade" required>
+                    </div>
+                    <div class="lineInput">
+                        <label>Telefone</label>
+                        <input class="form-control" type="text" name="telefone" id="telefone"
+                            placeholder="(00) 0000-000">
+                    </div>
+                    <div class="lineInput">
+                        <label>Preço da Mensalidade</label>
+                        <input class="form-control" type="text" name="mensalidade" id="mensalidade"
+                            placeholder="Preço do Transporte" required>
+                    </div>
+                    <div class="form-action-buttons">
+                        <button type="submit" class="submit">Salvar</button>
+                        <button type="reset" class="reset">Calncelar</button>
+                    </div>
+                </form>
             </div>
-            <div class="lineInput">
-                <label>Faculdade</label>
-                <input type="text" id="faculdade" placeholder="Faculdade do aluno">
+            <div class="card card-body card-form mt-4">
+                <table class="list table" id="bazarList">
+                    <thead class="thead-dark bg-primary ">
+                        <tr>
+                            <th scope="col">Nome Completo</th>
+                            <th scope="col">Faculdade</th>
+                            <th scope="col">Nome da Faculdade</th>
+                            <th scope="col">Valor da Mensalidade</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
-            <div class="lineInput">
-                <label>E-mail</label>
-                <input type="text" id="email" placeholder="E-mail">
-            </div>
-            <div class="lineInput">
-                <label>Telefone</label>
-                <input type="text" id="telefone" placeholder="(XX) XXXX-XXXX">
-            </div>
-            <button onclick="aluno.salvar()">Salvar</button>
-            <button onclick="aluno.cancelar()">Calncelar</button>
-        </div>
-        <div class="content">
-            <table border="1">
-                <thead>
-                    <th class="center">ID</th>
-                    <th>Nome</th>
-                    <th>Faculdade</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
-                    <th class="center">Ações</th>
-                </thead>
-                <tbody id="tbody">
-                    
-                </tbody>
-            </table>
-        </div>
     </main>
     <footer>
     </footer>
