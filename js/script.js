@@ -21,7 +21,7 @@ function readFormData() {
 }
 
 function insertNewRecord(data) {
-    var table = document.getElementById("bazarList").getElementsByTagName('tbody')[0];
+    var table = document.getElementById("tableList").getElementsByTagName('tbody')[0];
     var newRow = table.insertRow(table.length);
     cell1 = newRow.insertCell(0);
     cell1.innerHTML = data.nomeCompleto;
@@ -61,7 +61,7 @@ function updateRecord(formData) {
 function onDelete(td) {
     if (confirm('Are you sure to delete this record ?')) {
         row = td.parentElement.parentElement;
-        document.getElementById("bazarList").deleteRow(row.rowIndex);
+        document.getElementById("tableList").deleteRow(row.rowIndex);
         resetForm();
     }
 }
